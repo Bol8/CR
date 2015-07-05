@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ContractsRecollectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Base">
+          <Key>
+            <PropertyRef Name="IdContract" />
+          </Key>
+          <Property Name="IdContract" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdContractType" Type="int" Nullable="false" />
+          <Property Name="IdClient" Type="int" Nullable="false" />
+          <Property Name="UserCreation" Type="int" Nullable="false" />
+          <Property Name="UserUpdate" Type="int" Nullable="false" />
+          <Property Name="DateCreation" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BaseFieldsTemplate">
+          <Key>
+            <PropertyRef Name="idContractFieldTemplate" />
+          </Key>
+          <Property Name="idContractFieldTemplate" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idContractType" Type="int" Nullable="false" />
+          <Property Name="MandatoryField" Type="bit" Nullable="false" />
+          <Property Name="DefaultValue" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="AliasField" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="FieldValue" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="idContractFieldTypes" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BaseFieldType">
+          <Key>
+            <PropertyRef Name="IdContractFieldType" />
+          </Key>
+          <Property Name="IdContractFieldType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BaseType">
+          <Key>
+            <PropertyRef Name="IdContractType" />
+          </Key>
+          <Property Name="IdContractType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameContractType" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Types">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Base_BaseType">
+          <End Role="BaseType" Type="Self.BaseType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Base" Type="Self.Base" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BaseType">
+              <PropertyRef Name="IdContractType" />
+            </Principal>
+            <Dependent Role="Base">
+              <PropertyRef Name="IdContractType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BaseFieldsTemplate_BaseFieldType">
+          <End Role="BaseFieldType" Type="Self.BaseFieldType" Multiplicity="1" />
+          <End Role="BaseFieldsTemplate" Type="Self.BaseFieldsTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BaseFieldType">
+              <PropertyRef Name="IdContractFieldType" />
+            </Principal>
+            <Dependent Role="BaseFieldsTemplate">
+              <PropertyRef Name="idContractFieldTypes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BaseFieldsTemplate_BaseType">
+          <End Role="BaseType" Type="Self.BaseType" Multiplicity="1" />
+          <End Role="BaseFieldsTemplate" Type="Self.BaseFieldsTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BaseType">
+              <PropertyRef Name="IdContractType" />
+            </Principal>
+            <Dependent Role="BaseFieldsTemplate">
+              <PropertyRef Name="idContractType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BaseFieldType_Types">
+          <End Role="Types" Type="Self.Types" Multiplicity="1" />
+          <End Role="BaseFieldType" Type="Self.BaseFieldType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Types">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BaseFieldType">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ContractsRecollectModelStoreContainer">
+          <EntitySet Name="Base" EntityType="Self.Base" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BaseFieldsTemplate" EntityType="Self.BaseFieldsTemplate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BaseFieldType" EntityType="Self.BaseFieldType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BaseType" EntityType="Self.BaseType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Types" EntityType="Self.Types" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Base_BaseType" Association="Self.FK_Base_BaseType">
+            <End Role="BaseType" EntitySet="BaseType" />
+            <End Role="Base" EntitySet="Base" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BaseFieldsTemplate_BaseFieldType" Association="Self.FK_BaseFieldsTemplate_BaseFieldType">
+            <End Role="BaseFieldType" EntitySet="BaseFieldType" />
+            <End Role="BaseFieldsTemplate" EntitySet="BaseFieldsTemplate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BaseFieldsTemplate_BaseType" Association="Self.FK_BaseFieldsTemplate_BaseType">
+            <End Role="BaseType" EntitySet="BaseType" />
+            <End Role="BaseFieldsTemplate" EntitySet="BaseFieldsTemplate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BaseFieldType_Types" Association="Self.FK_BaseFieldType_Types">
+            <End Role="Types" EntitySet="Types" />
+            <End Role="BaseFieldType" EntitySet="BaseFieldType" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ContractsRecollectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Base">
+          <Key>
+            <PropertyRef Name="IdContract" />
+          </Key>
+          <Property Name="IdContract" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdContractType" Type="Int32" Nullable="false" />
+          <Property Name="IdClient" Type="Int32" Nullable="false" />
+          <Property Name="UserCreation" Type="Int32" Nullable="false" />
+          <Property Name="UserUpdate" Type="Int32" Nullable="false" />
+          <Property Name="DateCreation" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="BaseType" Relationship="Self.FK_Base_BaseType" FromRole="Base" ToRole="BaseType" />
+        </EntityType>
+        <EntityType Name="BaseFieldsTemplate">
+          <Key>
+            <PropertyRef Name="idContractFieldTemplate" />
+          </Key>
+          <Property Name="idContractFieldTemplate" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idContractType" Type="Int32" Nullable="false" />
+          <Property Name="MandatoryField" Type="Boolean" Nullable="false" />
+          <Property Name="DefaultValue" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="AliasField" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="FieldValue" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="idContractFieldTypes" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BaseFieldType" Relationship="Self.FK_BaseFieldsTemplate_BaseFieldType" FromRole="BaseFieldsTemplate" ToRole="BaseFieldType" />
+          <NavigationProperty Name="BaseType" Relationship="Self.FK_BaseFieldsTemplate_BaseType" FromRole="BaseFieldsTemplate" ToRole="BaseType" />
+        </EntityType>
+        <EntityType Name="BaseFieldType">
+          <Key>
+            <PropertyRef Name="IdContractFieldType" />
+          </Key>
+          <Property Name="IdContractFieldType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BaseFieldsTemplates" Relationship="Self.FK_BaseFieldsTemplate_BaseFieldType" FromRole="BaseFieldType" ToRole="BaseFieldsTemplate" />
+          <NavigationProperty Name="Type1" Relationship="Self.FK_BaseFieldType_Types" FromRole="BaseFieldType" ToRole="Types" />
+        </EntityType>
+        <EntityType Name="BaseType">
+          <Key>
+            <PropertyRef Name="IdContractType" />
+          </Key>
+          <Property Name="IdContractType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameContractType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Bases" Relationship="Self.FK_Base_BaseType" FromRole="BaseType" ToRole="Base" />
+          <NavigationProperty Name="BaseFieldsTemplates" Relationship="Self.FK_BaseFieldsTemplate_BaseType" FromRole="BaseType" ToRole="BaseFieldsTemplate" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="BaseFieldTypes" Relationship="Self.FK_BaseFieldType_Types" FromRole="Types" ToRole="BaseFieldType" />
+        </EntityType>
+        <Association Name="FK_Base_BaseType">
+          <End Role="BaseType" Type="Self.BaseType" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Base" Type="Self.Base" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BaseType">
+              <PropertyRef Name="IdContractType" />
+            </Principal>
+            <Dependent Role="Base">
+              <PropertyRef Name="IdContractType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BaseFieldsTemplate_BaseFieldType">
+          <End Role="BaseFieldType" Type="Self.BaseFieldType" Multiplicity="1" />
+          <End Role="BaseFieldsTemplate" Type="Self.BaseFieldsTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BaseFieldType">
+              <PropertyRef Name="IdContractFieldType" />
+            </Principal>
+            <Dependent Role="BaseFieldsTemplate">
+              <PropertyRef Name="idContractFieldTypes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BaseFieldsTemplate_BaseType">
+          <End Role="BaseType" Type="Self.BaseType" Multiplicity="1" />
+          <End Role="BaseFieldsTemplate" Type="Self.BaseFieldsTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BaseType">
+              <PropertyRef Name="IdContractType" />
+            </Principal>
+            <Dependent Role="BaseFieldsTemplate">
+              <PropertyRef Name="idContractType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BaseFieldType_Types">
+          <End Role="Types" Type="Self.Type" Multiplicity="1" />
+          <End Role="BaseFieldType" Type="Self.BaseFieldType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Types">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BaseFieldType">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ContractsRecollectEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bases" EntityType="Self.Base" />
+          <EntitySet Name="BaseFieldsTemplates" EntityType="Self.BaseFieldsTemplate" />
+          <EntitySet Name="BaseFieldTypes" EntityType="Self.BaseFieldType" />
+          <EntitySet Name="BaseTypes" EntityType="Self.BaseType" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Types" EntityType="Self.Type" />
+          <AssociationSet Name="FK_Base_BaseType" Association="Self.FK_Base_BaseType">
+            <End Role="BaseType" EntitySet="BaseTypes" />
+            <End Role="Base" EntitySet="Bases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BaseFieldsTemplate_BaseFieldType" Association="Self.FK_BaseFieldsTemplate_BaseFieldType">
+            <End Role="BaseFieldType" EntitySet="BaseFieldTypes" />
+            <End Role="BaseFieldsTemplate" EntitySet="BaseFieldsTemplates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BaseFieldsTemplate_BaseType" Association="Self.FK_BaseFieldsTemplate_BaseType">
+            <End Role="BaseType" EntitySet="BaseTypes" />
+            <End Role="BaseFieldsTemplate" EntitySet="BaseFieldsTemplates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BaseFieldType_Types" Association="Self.FK_BaseFieldType_Types">
+            <End Role="Types" EntitySet="Types" />
+            <End Role="BaseFieldType" EntitySet="BaseFieldTypes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ContractsRecollectModelStoreContainer" CdmEntityContainer="ContractsRecollectEntities">
+          <EntitySetMapping Name="Bases">
+            <EntityTypeMapping TypeName="ContractsRecollectModel.Base">
+              <MappingFragment StoreEntitySet="Base">
+                <ScalarProperty Name="IdContract" ColumnName="IdContract" />
+                <ScalarProperty Name="IdContractType" ColumnName="IdContractType" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="UserCreation" ColumnName="UserCreation" />
+                <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+                <ScalarProperty Name="DateCreation" ColumnName="DateCreation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BaseFieldsTemplates">
+            <EntityTypeMapping TypeName="ContractsRecollectModel.BaseFieldsTemplate">
+              <MappingFragment StoreEntitySet="BaseFieldsTemplate">
+                <ScalarProperty Name="idContractFieldTemplate" ColumnName="idContractFieldTemplate" />
+                <ScalarProperty Name="idContractType" ColumnName="idContractType" />
+                <ScalarProperty Name="MandatoryField" ColumnName="MandatoryField" />
+                <ScalarProperty Name="DefaultValue" ColumnName="DefaultValue" />
+                <ScalarProperty Name="AliasField" ColumnName="AliasField" />
+                <ScalarProperty Name="FieldValue" ColumnName="FieldValue" />
+                <ScalarProperty Name="idContractFieldTypes" ColumnName="idContractFieldTypes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BaseFieldTypes">
+            <EntityTypeMapping TypeName="ContractsRecollectModel.BaseFieldType">
+              <MappingFragment StoreEntitySet="BaseFieldType">
+                <ScalarProperty Name="IdContractFieldType" ColumnName="IdContractFieldType" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BaseTypes">
+            <EntityTypeMapping TypeName="ContractsRecollectModel.BaseType">
+              <MappingFragment StoreEntitySet="BaseType">
+                <ScalarProperty Name="IdContractType" ColumnName="IdContractType" />
+                <ScalarProperty Name="NameContractType" ColumnName="NameContractType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ContractsRecollectModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Types">
+            <EntityTypeMapping TypeName="ContractsRecollectModel.Type">
+              <MappingFragment StoreEntitySet="Types">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

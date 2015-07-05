@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="08bd01ad8e6c400f835b19476d0eff32" Name="Diagram1">
+        <EntityTypeShape EntityType="ContractsRecollectModel.Base" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ContractsRecollectModel.BaseFieldsTemplate" Width="1.5" PointX="6" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ContractsRecollectModel.BaseFieldType" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ContractsRecollectModel.BaseType" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ContractsRecollectModel.sysdiagram" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ContractsRecollectModel.Type" Width="1.5" PointX="1.5" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="ContractsRecollectModel.FK_Base_BaseType" ManuallyRouted="false" />
+        <AssociationConnector Association="ContractsRecollectModel.FK_BaseFieldsTemplate_BaseFieldType" ManuallyRouted="false" />
+        <AssociationConnector Association="ContractsRecollectModel.FK_BaseFieldsTemplate_BaseType" ManuallyRouted="false" />
+        <AssociationConnector Association="ContractsRecollectModel.FK_BaseFieldType_Types" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

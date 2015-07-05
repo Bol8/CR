@@ -1,0 +1,67 @@
+﻿<ul class="nav navbar-nav">
+
+    <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            Definiciones <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>@Html.ActionLink("Registro Datos", "Create", "BaseFieldTypes")</li>
+            <li>@Html.ActionLink("Registro Tipos", "Create", "BaseTypes")</li>
+            <li>@Html.ActionLink("Registro Plantilla Campo", "Create", "BaseFieldsTemplates")</li>
+            <li>@Html.ActionLink("Registro Detalles Campo", "Create", "BaseDetails")</li>
+            <li class="divider"></li>
+            @*<li role="presentation" class="dropdown-header">Tickets</li>*@
+            <li>@Html.ActionLink("Areas", "Index", "TicketArea")</li>
+            <li>@Html.ActionLink("Estados", "Index", "TicketEstado")</li>
+            <li>@Html.ActionLink("Objetos", "Index", "TicketObjeto")</li>
+            <li>@Html.ActionLink("Prioridades", "Index", "TicketPriority")</li>
+            <li>@Html.ActionLink("Tipos", "Index", "TicketTipo")</li>
+            <li>@Html.ActionLink("Tipo de anexos", "Index", "TicketAnexoTipo")</li>
+        </ul>
+    </li>
+
+    <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            Gestiones <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>@Html.ActionLink("Clientes", "Index", "Client")</li>
+            <li>@Html.ActionLink("Contratos", "Index", "Contract")</li>
+            <li>@Html.ActionLink("Licencias", "Index", "License")</li>
+            <li>@Html.ActionLink("Tickets", "Index", "Ticket")</li>
+            @*<li>@Html.ActionLink("Productos", "Index", "Product")</li>*@
+            <li class="divider"></li>
+            <li>@Html.ActionLink("Registros de Producto", "Index", "RegisteredProduct")</li>
+            @*<li>@Html.ActionLink("Gestión de Agentes", "Index", "Agent")</li>
+                <li>@Html.ActionLink("Gestión de Usuarios", "Index", "User")</li>*@
+            @*<li>@Html.ActionLink("Gestión de Estados de Tickets", "Index", "TicketEstado")</li>
+                <li>@Html.ActionLink("Gestion de Objetos de Tickets", "Index", "TicketObjeto")</li>
+                <li>@Html.ActionLink("Gestión de Tipo de Tickets", "Index", "TicketTipo")</li>
+                <li>@Html.ActionLink("Gestión de Prioridades de ticket", "Index", "TicketPriority")</li>
+                <li>@Html.ActionLink("Gestión de Areas de ticket", "Index", "TicketArea")</li>*@
+        </ul>
+    </li>
+
+    <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            Herramientas <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>@Html.ActionLink("Estado del sistema", "Index", "StateInfo")</li>
+            <li class="divider"></li>
+            <li>@Html.ActionLink("Registro de eventos", "Index", "RegEvent")</li>
+        </ul>
+    </li>
+
+    @*<li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                Ayuda <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                <li class="divider"></li>
+                <li>@Html.ActionLink("Acerca de...", "About", "Home")</li>
+            </ul>
+        </li>*@
+
+</ul>

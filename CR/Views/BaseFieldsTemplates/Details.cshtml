@@ -1,0 +1,74 @@
+﻿@model CR.Entities.BaseFieldsTemplate
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>BaseFieldsTemplate</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.MandatoryField)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.MandatoryField)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.DefaultValue)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DefaultValue)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.AliasField)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.AliasField)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.FieldValue)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.FieldValue)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.BaseFieldType.Name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.BaseFieldType.Name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.BaseType.NameContractType)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.BaseType.NameContractType)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.idContractFieldTemplate }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>
